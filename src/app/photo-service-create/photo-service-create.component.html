@@ -1,0 +1,100 @@
+
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Welcome!</h1>
+          <p class="text-lead text-light">Use these forms to create new photo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+
+
+
+  <div class="card-body">
+    <form [formGroup]="form">
+      <h6 class="heading-small text-muted mb-4">Photo Information</h6>
+      <hr class="my-4" />
+      <div class="pl-lg-4">
+        <div class="row ml-5 mb-5">
+          <div class="col-lg-6">
+            <div class="form-group">
+
+              <label class="form-control-label text-white" for="input-photoname">Photo Name</label>
+              <input type="text" [class.is-invalid]="form.get('name').touched && form.get('name').invalid"
+                     id="input-photoname" class="form-control" placeholder="Enter Photo Name" formControlName="name">
+              <small *ngIf="form.get('name').errors?.required && form.get('name').touched" class="text-danger">Name is required!</small>
+              <small *ngIf="form.get('name').errors?.minlength && form.get('name').touched" class="text-danger">Name must be at least 3 digits.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label text-white" for="input-address">Address</label>
+              <input type="text" [class.is-invalid]="form.get('address').touched && form.get('address').invalid"
+                     id="input-address" class="form-control" placeholder="Enter Address" formControlName="address">
+              <small *ngIf="form.get('address').errors?.required && form.get('address').touched" class="text-danger">Address is required!</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label text-white" for="input-email">Email</label>
+              <input type="email" [class.is-invalid]="form.get('email').touched && form.get('email').invalid"
+                     id="input-email" class="form-control" placeholder="Enter Email Address" formControlName="email">
+              <small *ngIf="form.get('email').errors?.required && form.get('email').touched" class="text-danger">Email is required!</small>
+              <small *ngIf="form.get('email').errors?.pattern && form.get('email').touched" class="text-danger">Enter a valid email!</small>
+
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label text-white" for="input-uploadtime">Upload Time</label>
+              <input type="text" [class.is-invalid]="form.get('uploadtime').touched && form.get('uploadtime').invalid"
+                     id="input-uploadtime" class="form-control" placeholder="Enter UploadTime" formControlName="uploadtime">
+              <small *ngIf="form.get('uploadtime').errors?.required && form.get('uploadtime').touched" class="text-danger">UploadTime is required!</small>
+            </div>
+
+
+          </div>
+
+
+
+
+
+          <!--          Photo Upload-->
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="card image border-success" style="width: 18rem;height: 18rem">
+                  <div class="card-body p-0 mb-0" (click)="image.click()">
+                    <img [src]="form.get('image').value" alt="" class="img-fluid vw-100 rounded" style="width: 18rem;height: 18rem">
+                  </div>
+                  <div class="card-footer p-0 border-0">
+                    <button class="btn btn-block btn-outline-secondary border-top-0" [hidden]="imgUpload" type="submit" (click)="upload(image.files[0],form.get('image'))" style="width: 18rem;height: 2rem">
+                      <span class="fa fa-upload mr-1"></span>Upload
+                    </button>
+                  </div>
+                </div>
+<!--                <input #image type="file" accept="image/*" class="d-none"-->
+<!--                       (change)="preview(image.files[0],(form.get('image'))">-->
+                <input #image type="file" accept="image/*" class="d-none" (change)="preview(image.files[0],form.get('image'))">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <hr class="my-4" />
+      <button class="btn btn-outline-success btn-md mb-5 mr-1" type="submit" (click)="save()">Submit Form</button>
+      <button class="btn btn-outline-success btn-md mb-5 mr-2"><a href="home">BackToHome</a></button>
+
+
+    </form>
+
+  </div>
+
+</div>
